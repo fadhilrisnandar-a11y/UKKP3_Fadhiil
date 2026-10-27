@@ -104,6 +104,7 @@
         }
 
         .form-group input[type="text"],
+        .form-group select,
         .form-group textarea,
         .form-group input[type="file"] {
             width: 100%;
@@ -113,9 +114,11 @@
             font-size: 14px;
             transition: 0.2s;
             background: #f8fafc;
+            color: #1e293b;
         }
 
         .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: #2563eb;
@@ -141,6 +144,14 @@
             border-radius: 8px;
             margin-bottom: 20px;
             font-size: 14px;
+        }
+
+        .success-msg {
+            background: #dcfce7;
+            color: #166534;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .form-actions {
@@ -218,7 +229,7 @@
 
     <nav class="navbar">
         <a href="{{ route('customer.dashboard') }}" class="brand">
-            📢 Pengaduan Masyarakat
+            📢 Pengaduan Cafe
         </a>
 
         <div class="nav-actions">
@@ -244,7 +255,7 @@
         </section>
 
         @if (session('success'))
-            <div style="background:#dcfce7;color:#166534;padding:12px 16px;border-radius:8px;margin-bottom:20px;">
+            <div class="success-msg">
                 {{ session('success') }}
             </div>
         @endif
@@ -275,12 +286,69 @@
                     id="judul"
                     name="judul"
                     value="{{ old('judul') }}"
-                    placeholder="Contoh: Jalan rusak di RT 05"
+                    placeholder="Contoh: Fasilitas rusak"
                     maxlength="255"
                     required
                 >
                 <div class="hint">
                     Tulis judul singkat yang menggambarkan masalah.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="kategori">Kategori Pengaduan</label>
+                <select id="kategori" name="kategori" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Infrastruktur"
+                        {{ old('kategori') == 'Infrastruktur' ? 'selected' : '' }}>
+                        Infrastruktur
+                    </option>
+                    <option value="Kebersihan"
+                        {{ old('kategori') == 'Kebersihan' ? 'selected' : '' }}>
+                        Kebersihan
+                    </option>
+                    <option value="Keamanan"
+                        {{ old('kategori') == 'Keamanan' ? 'selected' : '' }}>
+                        Keamanan
+                    </option>
+                    <option value="Pelayanan"
+                        {{ old('kategori') == 'Pelayanan' ? 'selected' : '' }}>
+                        Pelayanan
+                    </option>
+                    <option value="Lainnya"
+                        {{ old('kategori') == 'Lainnya' ? 'selected' : '' }}>
+                        Lainnya
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="lokasi">Lokasi Kejadian</label>
+                <input
+                    type="text"
+                    id="lokasi"
+                    name="lokasi"
+                    value="{{ old('lokasi') }}"
+                    maxlength="255"
+                    required
+                >
+                <div class="hint">
+                    Masukkan alamat atau tempat terjadinya masalah.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nomor_meja">Nomor Meja (Opsional)</label>
+                <input
+                    type="text"
+                    id="nomor_meja"
+                    name="nomor_meja"
+                    value="{{ old('nomor_meja') }}"
+                    placeholder="Contoh: Meja 05"
+                    maxlength="20"
+                >
+                <div class="hint">
+                    Isi jika pengaduan berkaitan dengan meja tertentu.
                 </div>
             </div>
 
@@ -324,7 +392,7 @@
     </main>
 
     <footer>
-        &copy; {{ date('Y') }} Pengaduan Masyarakat
+        &copy; {{ date('Y') }} Pengaduan Cafe
     </footer>
 
 </body>

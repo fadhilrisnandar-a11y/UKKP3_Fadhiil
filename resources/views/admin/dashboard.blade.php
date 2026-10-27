@@ -191,7 +191,7 @@
 <body>
 
     <aside class="sidebar">
-        <h2>📢 Pengaduan<br>Masyarakat</h2>
+        <h2>📢 Pengaduan<br>Cafe</h2>
 
         <a href="{{ url('/admin/dashboard') }}" class="active">
             🏠 Dashboard
@@ -247,7 +247,7 @@
         </section>
 
         <section class="section">
-            <h2>Kelola Pengaduan Masyarakat</h2>
+            <h2>Kelola Pengaduan Cafe</h2>
             <p>
                 Periksa laporan yang masuk, tinjau isi pengaduan,
                 dan perbarui status penanganannya.
@@ -260,7 +260,7 @@
         <section class="section">
             <h2>Data Customer</h2>
             <p>
-                Lihat data akun masyarakat yang terdaftar pada aplikasi.
+                Lihat data akun Cafe yang terdaftar pada aplikasi.
             </p>
             <a href="{{ url('/admin/customer') }}" class="btn">
                 Lihat Data Customer
@@ -268,7 +268,7 @@
         </section>
 
         <footer>
-            &copy; {{ date('Y') }} Pengaduan Masyarakat - Admin
+            &copy; {{ date('Y') }} Pengaduan Cafe - Admin
         </footer>
 
     </main>

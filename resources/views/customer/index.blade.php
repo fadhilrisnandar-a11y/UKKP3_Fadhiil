@@ -25,6 +25,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
             box-shadow: 0 2px 10px #00000008;
         }
 
@@ -48,6 +49,7 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .logout {
@@ -58,6 +60,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .container {
@@ -81,7 +84,7 @@
 
         .page-header h1 {
             font-size: 26px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .page-header p {
@@ -97,6 +100,7 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
+            white-space: nowrap;
         }
 
         .btn-add:hover {
@@ -111,33 +115,17 @@
             margin-bottom: 20px;
         }
 
-        .empty {
-            background: white;
-            padding: 60px 25px;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: 0 4px 15px #0f172a08;
-        }
-
-        .empty .icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
-
-        .empty h3 {
-            color: #475569;
-            margin-bottom: 8px;
-        }
-
-        .empty p {
-            color: #94a3b8;
+        .error-msg {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 14px 18px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            line-height: 1.6;
         }
 
         .pengaduan-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
 
@@ -149,8 +137,8 @@
             border: 1px solid #e2e8f0;
             display: flex;
             flex-direction: column;
-            transition: 0.2s;
             min-width: 0;
+            transition: 0.2s;
         }
 
         .pengaduan-card:hover {
@@ -169,13 +157,13 @@
         .card-top h3 {
             font-size: 17px;
             color: #1e293b;
-            line-height: 1.4;
+            line-height: 1.5;
             flex: 1;
             overflow-wrap: anywhere;
         }
 
         .badge {
-            padding: 5px 12px;
+            padding: 6px 11px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: bold;
@@ -211,35 +199,48 @@
         .card-meta {
             color: #64748b;
             font-size: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px 12px;
         }
 
-        .card-body {
-            color: #475569;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 18px;
-            flex: 1;
-            overflow-wrap: anywhere;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
         .card-image {
             width: 100%;
-            height: 160px;
+            height: 180px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
         }
 
+        .card-info {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .card-body {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex: 1;
+            overflow-wrap: anywhere;
+            white-space: pre-line;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
         .card-actions {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             border-top: 1px solid #f1f5f9;
             padding-top: 15px;
@@ -251,7 +252,7 @@
             text-align: center;
             background: #2563eb;
             color: white;
-            padding: 10px;
+            padding: 10px 14px;
             border-radius: 8px;
             text-decoration: none;
             font-size: 13px;
@@ -283,6 +284,31 @@
             margin: 0;
         }
 
+        .empty {
+            background: white;
+            padding: 60px 25px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 4px 15px #0f172a08;
+        }
+
+        .empty .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            color: #475569;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #64748b;
+            margin: 0 auto 22px;
+            line-height: 1.7;
+            max-width: 430px;
+        }
+
         footer {
             text-align: center;
             color: #94a3b8;
@@ -294,6 +320,7 @@
             .navbar {
                 padding: 18px 5%;
                 gap: 10px;
+                flex-wrap: wrap;
             }
 
             .brand {
@@ -308,6 +335,10 @@
             .logout {
                 padding: 9px 10px;
                 font-size: 12px;
+            }
+
+            .container {
+                margin-top: 25px;
             }
 
             .page-header {
@@ -325,6 +356,24 @@
             .pengaduan-card {
                 padding: 18px;
             }
+
+            .card-top {
+                flex-wrap: wrap;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .btn-detail,
+            .btn-delete {
+                width: 100%;
+                text-align: center;
+            }
+
+            .delete-form {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -333,7 +382,7 @@
 
     <nav class="navbar">
         <a href="{{ route('customer.dashboard') }}" class="brand">
-            📢 Pengaduan Masyarakat
+            📢 Pengaduan Cafe
         </a>
 
         <div class="nav-actions">
@@ -356,14 +405,28 @@
             </div>
         @endif
 
+        @if (session('error'))
+            <div class="error-msg">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="error-msg">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
         <section class="page-header">
             <div>
                 <h1>📂 Riwayat Pengaduan</h1>
-                <p>Daftar seluruh pengaduan yang pernah Anda kirim.</p>
+                <p>Daftar pengaduan yang pernah Anda kirim.</p>
             </div>
 
             <a href="{{ route('customer.create') }}" class="btn-add">
-                + Buat Baru
+                + Buat Pengaduan
             </a>
         </section>
 
@@ -373,39 +436,57 @@
 
                 @foreach ($pengaduan as $p)
 
+                    @php
+                        $status = strtolower($p->status ?? 'menunggu');
+
+                        $statusMap = [
+                            'menunggu' => [
+                                'label' => 'Menunggu',
+                                'class' => 'badge-menunggu',
+                            ],
+                            'proses' => [
+                                'label' => 'Diproses',
+                                'class' => 'badge-proses',
+                            ],
+                            'diproses' => [
+                                'label' => 'Diproses',
+                                'class' => 'badge-diproses',
+                            ],
+                            'selesai' => [
+                                'label' => 'Selesai',
+                                'class' => 'badge-selesai',
+                            ],
+                            'ditolak' => [
+                                'label' => 'Ditolak',
+                                'class' => 'badge-ditolak',
+                            ],
+                        ];
+
+                        $statusInfo = $statusMap[$status] ?? [
+                            'label' => ucfirst($status),
+                            'class' => 'badge-lainnya',
+                        ];
+
+                        $tanggal = $p->tanggal_pengaduan
+                            ?? $p->created_at;
+                    @endphp
+
                     <article class="pengaduan-card">
 
                         <div class="card-top">
                             <h3>{{ $p->judul }}</h3>
 
-                            @php
-                                $status = strtolower($p->status ?? 'menunggu');
-
-                                $label = [
-                                    'menunggu' => 'Menunggu',
-                                    'proses' => 'Diproses',
-                                    'diproses' => 'Diproses',
-                                    'selesai' => 'Selesai',
-                                    'ditolak' => 'Ditolak',
-                                ][$status] ?? ucfirst($status);
-
-                                $badgeClass = in_array(
-                                    $status,
-                                    ['menunggu', 'proses', 'diproses', 'selesai', 'ditolak']
-                                ) ? 'badge-' . $status : 'badge-lainnya';
-                            @endphp
-
-                            <span class="badge {{ $badgeClass }}">
-                                {{ $label }}
+                            <span class="badge {{ $statusInfo['class'] }}">
+                                {{ $statusInfo['label'] }}
                             </span>
                         </div>
 
                         <div class="card-meta">
                             <span>
                                 📅
-                                {{ $p->tanggal_pengaduan
-                                    ? \Carbon\Carbon::parse($p->tanggal_pengaduan)->format('d M Y')
-                                    : $p->created_at->format('d M Y') }}
+                                {{ $tanggal
+                                    ? \Carbon\Carbon::parse($tanggal)->format('d M Y')
+                                    : '-' }}
                             </span>
 
                             <span>🆔 #{{ $p->id }}</span>
@@ -420,9 +501,30 @@
                             >
                         @endif
 
-                        <div class="card-body">
-                            {{ $p->isi }}
+                        <div class="card-info">
+                            @if (!empty($p->kategori))
+                                <div>
+                                    <strong>🏷️ Kategori:</strong>
+                                    {{ $p->kategori }}
+                                </div>
+                            @endif
+
+                            @if (!empty($p->lokasi))
+                                <div>
+                                    <strong>📍 Lokasi:</strong>
+                                    {{ $p->lokasi }}
+                                </div>
+                            @endif
+
+                            @if (!empty($p->nomor_meja))
+                                <div>
+                                    <strong>🪑 Nomor Meja:</strong>
+                                    {{ $p->nomor_meja }}
+                                </div>
+                            @endif
                         </div>
+
+                        <div class="card-body">{{ $p->isi }}</div>
 
                         <div class="card-actions">
 
@@ -457,6 +559,12 @@
 
             </section>
 
+            @if (method_exists($pengaduan, 'links'))
+                <div style="margin-top:25px;">
+                    {{ $pengaduan->links() }}
+                </div>
+            @endif
+
         @else
 
             <section class="empty">
@@ -466,13 +574,14 @@
 
                 <p>
                     Anda belum mengirimkan pengaduan apa pun.
-                    Yuk, mulai sampaikan laporan Anda!
+                    Mulai buat laporan agar dapat dipantau melalui
+                    halaman riwayat ini.
                 </p>
 
                 <a
                     href="{{ route('customer.create') }}"
                     class="btn-detail"
-                    style="display: inline-block; padding: 12px 24px; flex: none;"
+                    style="display:inline-block;flex:none;padding:12px 24px;"
                 >
                     Buat Pengaduan Pertama
                 </a>
@@ -483,7 +592,7 @@
     </main>
 
     <footer>
-        &copy; {{ date('Y') }} Pengaduan Masyarakat
+        &copy; {{ date('Y') }} Pengaduan Cafe
     </footer>
 
 </body>

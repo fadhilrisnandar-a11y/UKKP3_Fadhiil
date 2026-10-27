@@ -28,19 +28,18 @@ class PengaduanController extends Controller
     // Menyimpan pengaduan baru
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'judul' => 'required|string|max:255',
-            'isi'   => 'required|string',
-            'foto'  => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'kategori' => 'required|string|max:100',
+            'lokasi' => 'required|string|max:255',
+            'nomor_meja' => 'nullable|string|max:50',
+            'isi' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $data = [
-            'user_id'           => Auth::id(),
-            'judul'             => $request->judul,
-            'isi'               => $request->isi,
-            'tanggal_pengaduan' => now()->toDateString(),
-            'status'            => 'menunggu',
-        ];
+        $data['user_id'] = Auth::id();
+        $data['tanggal_pengaduan'] = now()->toDateString();
+        $data['status'] = 'menunggu';
 
         // Upload foto jika ada
         if ($request->hasFile('foto')) {
@@ -69,6 +68,13 @@ class PengaduanController extends Controller
     {
         $item = Pengaduan::where('user_id', Auth::id())
             ->findOrFail($id);
+
+        // Hanya pengaduan berstatus menunggu yang boleh dihapus
+        if (strtolower($item->status ?? 'menunggu') !== 'menunggu') {
+            return redirect()
+                ->route('customer.index')
+                ->with('error', 'Pengaduan ini tidak dapat dihapus karena sudah diproses.');
+        }
 
         // Hapus foto dari storage jika tersedia
         if ($item->foto) {

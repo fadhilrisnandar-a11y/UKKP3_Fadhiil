@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Pengaduan Masyarakat</title>
+    <title>Login - Pengaduan </title>
 
     <style>
         * {
@@ -157,7 +157,7 @@
         <h1>Selamat Datang</h1>
 
         <p class="subtitle">
-            Silakan login ke akun Pengaduan Masyarakat Anda.
+            Silakan login ke akun Pengaduan Anda.
         </p>
 
         @if (session('success'))
@@ -211,7 +211,7 @@
         </div>
 
         <div class="footer">
-            &copy; {{ date('Y') }} Pengaduan Masyarakat
+            &copy; {{ date('Y') }} Pengaduan 
         </div>
 
     </div>

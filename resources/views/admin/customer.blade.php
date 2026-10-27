@@ -280,7 +280,7 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <h2>📢 Pengaduan<br>Masyarakat</h2>
+        <h2>📢 Pengaduan<br>Cafe</h2>
 
         <a href="{{ url('/admin/dashboard') }}">
             🏠 Dashboard
@@ -302,7 +302,7 @@
         <header class="topbar">
             <div>
                 <h1>Data User</h1>
-                <p>Daftar akun masyarakat yang terdaftar di aplikasi.</p>
+                <p>Daftar akun Cafe yang terdaftar di aplikasi.</p>
             </div>
 
             <form action="{{ url('/logout') }}" method="POST">
@@ -317,7 +317,7 @@
             <h2>Tabel Data User</h2>
 
             <p class="description">
-                Kelola akun masyarakat yang terdaftar di aplikasi.
+                Kelola akun Cafe yang terdaftar di aplikasi.
             </p>
 
             <!-- NOTIFIKASI BERHASIL -->
@@ -458,7 +458,7 @@
 
         <!-- FOOTER -->
         <footer>
-            &copy; {{ date('Y') }} Pengaduan Masyarakat - Admin
+            &copy; {{ date('Y') }} Pengaduan Cafe - Admin
         </footer>
 
     </main>

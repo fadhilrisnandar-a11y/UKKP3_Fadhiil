@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Pengaduan Masyarakat</title>
+    <title>Register - Pengaduan Cafe</title>
 
     <style>
         * {
@@ -144,7 +144,7 @@
         <h1>Buat Akun Baru</h1>
 
         <p class="subtitle">
-            Daftarkan diri Anda untuk menggunakan layanan Pengaduan Masyarakat.
+            Daftarkan diri Anda untuk menggunakan layanan Pengaduan Cafe.
         </p>
 
         @if ($errors->any())
@@ -215,7 +215,7 @@
         </div>
 
         <div class="footer">
-            &copy; {{ date('Y') }} Pengaduan Masyarakat
+            &copy; {{ date('Y') }} Pengaduan Cafe
         </div>
 
     </div>

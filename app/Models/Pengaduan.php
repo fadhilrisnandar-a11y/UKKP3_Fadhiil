@@ -10,13 +10,16 @@ class Pengaduan extends Model
     protected $table = 'pengaduan';
 
     protected $fillable = [
-        'user_id',
-        'judul',
-        'isi',
-        'tanggal_pengaduan',
-        'status',
-        'foto',
-    ];
+    'user_id',
+    'judul',
+    'isi',
+    'kategori',
+    'lokasi',
+    'nomor_meja',
+    'tanggal_pengaduan',
+    'status',
+    'foto',
+];
 
     // Relasi pengaduan dengan pengguna yang membuat laporan
     public function user(): BelongsTo

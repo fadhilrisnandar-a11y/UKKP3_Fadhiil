@@ -155,9 +155,11 @@
             font-weight: bold;
             font-size: 12px;
             cursor: pointer;
+            white-space: nowrap;
         }
 
-        .btn:hover {
+        .btn:hover,
+        .logout:hover {
             opacity: .85;
         }
 
@@ -177,7 +179,7 @@
 
         table {
             width: 100%;
-            min-width: 850px;
+            min-width: 1100px;
             border-collapse: collapse;
         }
 
@@ -186,11 +188,13 @@
             text-align: left;
             border-bottom: 1px solid #e2e8f0;
             font-size: 14px;
+            vertical-align: middle;
         }
 
         th {
             background: #eff6ff;
             color: #1e3a8a;
+            white-space: nowrap;
         }
 
         tbody tr:hover {
@@ -287,8 +291,9 @@
 
 <body>
 
+    {{-- SIDEBAR --}}
     <aside class="sidebar">
-        <h2>📢 Pengaduan<br>Masyarakat</h2>
+        <h2>📢 Pengaduan<br>Cafe</h2>
 
         <a href="{{ route('admin.dashboard') }}">
             🏠 Dashboard
@@ -303,8 +308,10 @@
         </a>
     </aside>
 
+    {{-- KONTEN UTAMA --}}
     <main class="main">
 
+        {{-- HEADER --}}
         <header class="topbar">
             <div>
                 <h1>Data Pengaduan</h1>
@@ -313,33 +320,38 @@
 
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
+
                 <button type="submit" class="logout">
                     Logout
                 </button>
             </form>
         </header>
 
+        {{-- DAFTAR PENGADUAN --}}
         <section class="content">
 
-            <h2>Daftar Pengaduan Masyarakat</h2>
+            <h2>Daftar Pengaduan Cafe</h2>
 
             <p class="description">
-                Lihat laporan masyarakat, cari pengaduan,
+                Lihat laporan Cafe, cari pengaduan,
                 dan pantau status penanganan laporan.
             </p>
 
+            {{-- PESAN BERHASIL --}}
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
 
+            {{-- PESAN ERROR --}}
             @if (session('error'))
                 <div class="alert alert-error">
                     {{ session('error') }}
                 </div>
             @endif
 
+            {{-- VALIDASI --}}
             @if ($errors->any())
                 <div class="alert alert-error">
                     @foreach ($errors->all() as $error)
@@ -349,10 +361,11 @@
             @endif
 
             {{-- PENCARIAN DAN FILTER --}}
-            <form action="{{ route('admin.pengaduan') }}"
-                  method="GET"
-                  class="search-form">
-
+            <form
+                action="{{ route('admin.pengaduan') }}"
+                method="GET"
+                class="search-form"
+            >
                 <input
                     type="text"
                     name="search"
@@ -363,18 +376,24 @@
                 <select name="status">
                     <option value="">Semua Status</option>
 
-                    <option value="menunggu"
-                        @selected(request('status') === 'menunggu')>
+                    <option
+                        value="menunggu"
+                        @selected(request('status') === 'menunggu')
+                    >
                         Menunggu
                     </option>
 
-                    <option value="diproses"
-                        @selected(request('status') === 'diproses')>
+                    <option
+                        value="diproses"
+                        @selected(request('status') === 'diproses')
+                    >
                         Diproses
                     </option>
 
-                    <option value="selesai"
-                        @selected(request('status') === 'selesai')>
+                    <option
+                        value="selesai"
+                        @selected(request('status') === 'selesai')
+                    >
                         Selesai
                     </option>
                 </select>
@@ -383,8 +402,10 @@
                     🔍 Cari
                 </button>
 
-                <a href="{{ route('admin.pengaduan') }}"
-                   class="btn btn-reset">
+                <a
+                    href="{{ route('admin.pengaduan') }}"
+                    class="btn btn-reset"
+                >
                     Reset
                 </a>
             </form>
@@ -393,7 +414,7 @@
                 Total data ditampilkan: {{ $pengaduan->count() }} pengaduan
             </p>
 
-            {{-- TABEL PENGADUAN --}}
+            {{-- TABEL --}}
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -401,6 +422,9 @@
                             <th>No.</th>
                             <th>Nama Customer</th>
                             <th>Judul Pengaduan</th>
+                            <th>Kategori</th>
+                            <th>Lokasi</th>
+                            <th>Nomor Meja</th>
                             <th>Tanggal</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -409,15 +433,6 @@
 
                     <tbody>
                         @forelse ($pengaduan as $item)
-                            @php
-                                $status = strtolower($item->status ?? 'menunggu');
-
-                                $classStatus = in_array(
-                                    $status,
-                                    ['menunggu', 'diproses', 'selesai']
-                                ) ? $status : 'menunggu';
-                            @endphp
-
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
 
@@ -430,23 +445,35 @@
                                 </td>
 
                                 <td>
-                                    {{ $item->tanggal_pengaduan
-                                        ? \Illuminate\Support\Carbon::parse($item->tanggal_pengaduan)->format('d-m-Y')
-                                        : ($item->created_at
-                                            ? $item->created_at->format('d-m-Y')
-                                            : '-') }}
+                                    {{ $item->kategori ?? '-' }}
                                 </td>
 
                                 <td>
-                                    <span class="badge {{ $classStatus }}">
+                                    {{ $item->lokasi ?? '-' }}
+                                </td>
+
+                                <td>
+                                    {{ $item->nomor_meja ?? '-' }}
+                                </td>
+
+                                <td>
+                                    {{ $item->tanggal_pengaduan
+                                        ? \Carbon\Carbon::parse($item->tanggal_pengaduan)->format('d-m-Y')
+                                        : ($item->created_at?->format('d-m-Y') ?? '-') }}
+                                </td>
+
+                                <td>
+                                    @php
+                                        $status = strtolower($item->status ?? 'menunggu');
+                                    @endphp
+
+                                    <span class="badge {{ $status }}">
                                         {{ ucfirst($status) }}
                                     </span>
                                 </td>
 
                                 <td>
                                     <div class="actions">
-
-                                        {{-- DETAIL --}}
                                         <a
                                             href="{{ route('admin.pengaduan.detail', $item->id) }}"
                                             class="btn"
@@ -454,11 +481,10 @@
                                             Detail
                                         </a>
 
-                                        {{-- HAPUS --}}
                                         <form
                                             action="{{ route('admin.pengaduan.destroy', $item->id) }}"
                                             method="POST"
-                                            onsubmit="return confirm('Apakah kamu yakin ingin menghapus pengaduan ini?')"
+                                            onsubmit="return confirm('Yakin ingin menghapus pengaduan ini?')"
                                         >
                                             @csrf
                                             @method('DELETE')
@@ -470,15 +496,13 @@
                                                 Hapus
                                             </button>
                                         </form>
-
                                     </div>
                                 </td>
                             </tr>
-
                         @empty
                             <tr>
-                                <td colspan="6" class="empty">
-                                    Tidak ada data pengaduan yang ditemukan.
+                                <td colspan="9" class="empty">
+                                    Belum ada data pengaduan.
                                 </td>
                             </tr>
                         @endforelse
@@ -489,7 +513,7 @@
         </section>
 
         <footer>
-            &copy; {{ date('Y') }} Pengaduan Masyarakat - Admin
+            &copy; {{ date('Y') }} Sistem Pengaduan Cafe
         </footer>
 
     </main>

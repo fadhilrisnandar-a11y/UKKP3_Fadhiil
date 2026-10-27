@@ -59,6 +59,10 @@
             font-weight: bold;
         }
 
+        .back:hover {
+            color: #1d4ed8;
+        }
+
         .field {
             margin-bottom: 22px;
             line-height: 1.7;
@@ -91,7 +95,8 @@
             color: #92400e;
         }
 
-        .diproses {
+        .diproses,
+        .proses {
             background: #dbeafe;
             color: #1d4ed8;
         }
@@ -152,8 +157,16 @@
                 padding: 12px;
             }
 
+            .container {
+                margin: 12px auto;
+            }
+
             .card {
                 padding: 20px;
+            }
+
+            .header {
+                padding: 22px;
             }
 
             .header h1 {
@@ -195,6 +208,23 @@
         </div>
 
         <div class="field">
+            <label>Kategori Pengaduan</label>
+            <div class="value">{{ $item->kategori ?? '-' }}</div>
+        </div>
+
+        <div class="field">
+            <label>Lokasi Pengaduan</label>
+            <div class="value">{{ $item->lokasi ?? '-' }}</div>
+        </div>
+
+        @if (!empty($item->nomor_meja))
+            <div class="field">
+                <label>Nomor Meja</label>
+                <div class="value">{{ $item->nomor_meja }}</div>
+            </div>
+        @endif
+
+        <div class="field">
             <label>Isi Pengaduan</label>
             <div class="value">{{ $item->isi ?? '-' }}</div>
         </div>
@@ -218,21 +248,37 @@
             @php
                 $status = strtolower($item->status ?? 'menunggu');
 
-                $statusClass = in_array(
-                    $status,
-                    ['menunggu', 'diproses', 'selesai', 'ditolak']
-                ) ? $status : 'menunggu';
+                $statusMap = [
+                    'menunggu' => [
+                        'label' => 'Menunggu',
+                        'class' => 'menunggu',
+                    ],
+                    'proses' => [
+                        'label' => 'Sedang Diproses',
+                        'class' => 'proses',
+                    ],
+                    'diproses' => [
+                        'label' => 'Sedang Diproses',
+                        'class' => 'diproses',
+                    ],
+                    'selesai' => [
+                        'label' => 'Selesai',
+                        'class' => 'selesai',
+                    ],
+                    'ditolak' => [
+                        'label' => 'Ditolak',
+                        'class' => 'ditolak',
+                    ],
+                ];
 
-                $statusLabel = [
-                    'menunggu' => 'Menunggu',
-                    'diproses' => 'Sedang Diproses',
-                    'selesai' => 'Selesai',
-                    'ditolak' => 'Ditolak',
-                ][$status] ?? ucfirst($status);
+                $statusInfo = $statusMap[$status] ?? [
+                    'label' => ucfirst($status),
+                    'class' => 'menunggu',
+                ];
             @endphp
 
-            <span class="badge {{ $statusClass }}">
-                {{ $statusLabel }}
+            <span class="badge {{ $statusInfo['class'] }}">
+                {{ $statusInfo['label'] }}
             </span>
         </div>
 
@@ -263,8 +309,11 @@
                 </p>
 
                 <p style="margin-top:10px;">
-                    <a href="{{ $fotoUrl }}" target="_blank"
-                       rel="noopener noreferrer">
+                    <a
+                        href="{{ $fotoUrl }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         Buka Foto
                     </a>
                 </p>
@@ -274,11 +323,11 @@
                 </p>
             @endif
         </div>
-    
+
     </section>
 
     <footer>
-        &copy; {{ date('Y') }} Pengaduan Masyarakat
+        &copy; {{ date('Y') }} Pengaduan Cafe
     </footer>
 
 </div>
